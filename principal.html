@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Principal</title>
+    
+   
+    <img src="assets/img/imagen.png">
+    </img>
+    <p>Lizz Gutierrez</p>
+
+
+
+<h1 >PAGINA PRINCIPAL</h1>
+
+
+<script>
+function checkLoginState() {               // Called when a person is finished with the Login Button.
+    FB.getLoginStatus(function(response) {   // See the onlogin handler
+      statusChangeCallback(response);
+    });
+  }
+
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '741304393116713',
+      cookie     : true,                     // Enable cookies to allow the server to access the session.
+      xfbml      : true,                     // Parse social plugins on this webpage.
+      version    : 'v8.0',  
+      profileFields:['email'],
+      scope :['email'],   
+               // Use this Graph API version for this call.
+    });
+
+
+    FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
+      statusChangeCallback(response);        // Returns the login status.
+    });
+  };
+
+ 
+  function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me','get',{fields:'name,email,picture.type(large)'}, function(response) {
+      console.log('Inicion de sesion  exitosa para: ' + response.name);
+     
+     document.getElementById('status').innerHTML =
+        'Nombre del usuario: ' + response.name + 
+        '<br> Correo:' + response.email +
+        '<br> <img src="'+ response.picture.data.url+'" width="100px">';
+
+         
+ FB.api('/me', function(response) {
+  console.log(JSON.stringify(response));
+});
+
+
+
+
+FB.login(function(response) {
+if (response.status === 'connected') {
+
+// Logged into your webpage and Facebook.
+} else {
+// The person is not logged into your webpage or we are unable to tell. 
+}
+});
+
+    
+
+    });
+  }
+
+</script>
+
+<style>
+    h1{
+        position: center;
+        text-align: center;
+        padding: 100px;
+    }
+
+    p {
+        margin-left: 1200px;
+    }
+
+    img{
+        margin-left: 1200px;
+    }
+</style>
+
+</head>
+<body>
+    
+</body>
+</html>
